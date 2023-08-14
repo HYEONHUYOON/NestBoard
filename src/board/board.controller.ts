@@ -2,6 +2,7 @@ import { Controller,Get,Post,Delete,Patch,Body,Param,UsePipes,ValidationPipe } f
 import { BoardService } from './board.service';
 import { Board, BoardStatus } from './board.model';
 import { CreateBaordDto } from './dto/create-board.dto';
+import { BoardStatusValidationPipe } from './pipes/board.status.validation.pipe';
 
 @Controller('board')
 export class BoardController {
@@ -32,7 +33,7 @@ export class BoardController {
     }
 
     @Patch('/:id/status')
-    UpdateBoardStatus(@Param('id') id : string,@Body('status') status : BoardStatus) : Board{
+    UpdateBoardStatus(@Param('id') id : string,@Body('status',BoardStatusValidationPipe) status : BoardStatus) : Board{
         return this.UpdateBoardStatus(id,status)
     }
 }
