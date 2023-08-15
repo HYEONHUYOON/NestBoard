@@ -1,8 +1,9 @@
 import { Controller,Get,Post,Delete,Patch,Body,Param,UsePipes,ValidationPipe } from '@nestjs/common';
 import { BoardService } from './board.service';
-import { Board, BoardStatus } from './board.model';
+import { BoardStatus } from './board.model';
 import { CreateBaordDto } from './dto/create-board.dto';
 import { BoardStatusValidationPipe } from './pipes/board.status.validation.pipe';
+import {Board} from './board.entity';
 
 @Controller('board')
 export class BoardController {
@@ -23,7 +24,7 @@ export class BoardController {
     }
 
     @Get('/:id')
-    GetBoardById(@Param('id') id : string) : Board{
+    GetBoardById(@Param('id') id : string) : Promise <Board>{
         return this.boardService.GetBoardById(id);
     }
 
